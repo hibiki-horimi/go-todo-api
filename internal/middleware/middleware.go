@@ -2,12 +2,15 @@ package middleware
 
 import (
 	"github.com/hibiki-horimi/go-todo-api/internal/database/postgres"
+	"github.com/hibiki-horimi/go-todo-api/internal/server/request"
 	echo "github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/gorm"
 )
 
 func Setup(e *echo.Echo, gdb *gorm.DB, rdb *postgres.Postgres) {
+	e.Binder = request.InitBinder()
+	e.Validator = request.InitValidator()
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format: `{"time":"${time_rfc3339_nano}", "method":"${method}", "uri":"${uri}", "status":"${status}", "error":"${error}", "latency":"${latency}"}` + "\n",
 	}))

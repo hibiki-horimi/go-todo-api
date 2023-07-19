@@ -13,7 +13,6 @@ import (
 	"github.com/hibiki-horimi/go-todo-api/internal/middleware"
 	"github.com/hibiki-horimi/go-todo-api/internal/route"
 	"github.com/hibiki-horimi/go-todo-api/internal/server"
-	"github.com/hibiki-horimi/go-todo-api/internal/server/request"
 	echo "github.com/labstack/echo/v4"
 	"github.com/spf13/cobra"
 )
@@ -55,7 +54,6 @@ func serverRun(_ *cobra.Command, _ []string) error {
 
 	srv := server.New(rdb, conf)
 	route.New(e, srv)
-	e.Validator = request.New()
 
 	go func() {
 		if err = e.Start(fmt.Sprintf("%s:%d", conf.Server.Host, conf.Server.Port)); err != nil {
