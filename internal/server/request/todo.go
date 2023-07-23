@@ -22,7 +22,7 @@ func (req *CreateTodo) ToTodo() *domain.Todo {
 }
 
 type GetTodo struct {
-	ID string `param:"taskId" validate:"required,uuid"`
+	ID string `param:"id" validate:"required,uuid"`
 }
 
 func (req *GetTodo) ToTodo() *domain.Todo {
@@ -32,7 +32,7 @@ func (req *GetTodo) ToTodo() *domain.Todo {
 }
 
 type UpdateTodo struct {
-	ID   string `param:"taskId" validate:"required,uuid"`
+	ID   string `param:"id" validate:"required,uuid"`
 	Task string `json:"task" validate:"required"`
 	Done *bool  `json:"done" validate:"required"`
 }
@@ -53,7 +53,7 @@ func (req *UpdateTodo) ToTodoByID() *domain.Todo {
 }
 
 type DeleteTodo struct {
-	ID string `param:"taskId" validate:"required,uuid"`
+	ID string `param:"id" validate:"required,uuid"`
 }
 
 func (req *DeleteTodo) ToTodo() *domain.Todo {

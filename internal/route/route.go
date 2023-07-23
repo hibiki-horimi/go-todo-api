@@ -20,12 +20,12 @@ func New(e *echo.Echo, srv *server.Server) {
 			return c.JSON(http.StatusOK, "healthy")
 		})
 
-		tasks := api.Group("/tasks")
+		todo := api.Group("/todos")
 		{
-			tasks.GET("", srv.Todo.List)
-			tasks.POST("", srv.Todo.Create)
+			todo.GET("", srv.Todo.List)
+			todo.POST("", srv.Todo.Create)
 
-			task := tasks.Group("/:taskId")
+			task := todo.Group("/:id")
 			{
 				task.GET("", srv.Todo.Get)
 				task.PUT("", srv.Todo.Update)
