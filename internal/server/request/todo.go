@@ -51,3 +51,13 @@ func (req *UpdateTodo) ToTodoByID() *domain.Todo {
 		ID: uuid.Must(uuid.FromString(req.ID)),
 	}
 }
+
+type DeleteTodo struct {
+	ID string `param:"taskId" validate:"required,uuid"`
+}
+
+func (req *DeleteTodo) ToTodo() *domain.Todo {
+	return &domain.Todo{
+		ID: uuid.Must(uuid.FromString(req.ID)),
+	}
+}

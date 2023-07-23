@@ -26,8 +26,11 @@ func New(e *echo.Echo, srv *server.Server) {
 			tasks.POST("", srv.Todo.Create)
 
 			task := tasks.Group("/:taskId")
-			task.GET("", srv.Todo.Get)
-			task.PUT("", srv.Todo.Update)
+			{
+				task.GET("", srv.Todo.Get)
+				task.PUT("", srv.Todo.Update)
+				task.DELETE("", srv.Todo.Delete)
+			}
 		}
 	}
 }

@@ -17,6 +17,7 @@ type Todo interface {
 	List(c echo.Context) error
 	Create(c echo.Context) error
 	Update(c echo.Context) error
+	Delete(c echo.Context) error
 }
 
 type todo struct {
@@ -69,7 +70,7 @@ func (s *todo) Create(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, response.ToTodo(todo))
+	return c.JSON(http.StatusCreated, response.ToTodo(todo))
 }
 
 func (s *todo) Update(c echo.Context) error {
@@ -94,4 +95,28 @@ func (s *todo) Update(c echo.Context) error {
 		return err
 	}
 	return c.JSON(http.StatusOK, response.ToTodo(res))
+}
+
+func (s *todo) Delete(c echo.Context) error {
+	var req request.DeleteTodo
+	if err := c.Bind(&req); err != nil {
+		return err
+	}
+	if err := c.Validate(&req); err != nil {
+		return err
+	}
+	ctx := c.Request().Context()
+
+	_, err := s.rdb.Todo.Get(ctx, req.ToTodo())
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return echo.NewHTTPError(http.StatusNotFound, err.Error())
+		}
+		return err
+	}
+
+	if err := s.rdb.Todo.Delete(ctx, req.ToTodo()); err != nil {
+		return err
+	}
+	return c.NoContent(http.StatusNoContent)
 }
