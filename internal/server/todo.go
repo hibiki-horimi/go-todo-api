@@ -89,12 +89,7 @@ func (s *todo) Update(c echo.Context) error {
 		return err
 	}
 
-	// created_atを取得するため更新
-	res, err := s.rdb.Todo.Get(ctx, req.ToTodoByID())
-	if err != nil {
-		return err
-	}
-	return c.JSON(http.StatusOK, response.ToTodo(res))
+	return c.JSON(http.StatusOK, response.ToTodo(todo))
 }
 
 func (s *todo) Delete(c echo.Context) error {

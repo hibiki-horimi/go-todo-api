@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/hibiki-horimi/go-todo-api/internal/domain"
+	"gorm.io/gorm/clause"
 )
 
 type Todo interface {
@@ -45,7 +46,10 @@ func (pg *todo) Update(ctx context.Context, model *domain.Todo) error {
 		"task",
 		"done",
 	}
-	if err := DBFromContext(ctx).Select(columns).Updates(model).Error; err != nil {
+	if err := DBFromContext(ctx).
+		Clauses(clause.Returning{Columns: []clause.Column{{Name: "created_at"}}}).
+		Select(columns).
+		Updates(model).Error; err != nil {
 		return err
 	}
 	return nil

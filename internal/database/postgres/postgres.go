@@ -36,7 +36,6 @@ func Connect(conf *config.Config) (*gorm.DB, error) {
 	)
 
 	return gorm.Open(postgres.Open(dsn), &gorm.Config{
-		// Logger: newLogger,
 		NowFunc: func() time.Time {
 			return time.Now().In(time.UTC)
 		},
