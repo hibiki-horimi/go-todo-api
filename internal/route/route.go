@@ -27,6 +27,7 @@ func New(e *echo.Echo, srv *server.Server) {
 
 			task := tasks.Group("/:taskId")
 			task.GET("", srv.Todo.Get)
+			task.PUT("", srv.Todo.Update)
 		}
 	}
 }

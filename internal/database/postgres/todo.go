@@ -10,6 +10,7 @@ type Todo interface {
 	Get(ctx context.Context, condition *domain.Todo) (*domain.Todo, error)
 	Find(ctx context.Context, condition *domain.Todo) (domain.TodoList, error)
 	Create(ctx context.Context, model *domain.Todo) error
+	Update(ctx context.Context, model *domain.Todo) error
 }
 
 type todo struct{}
@@ -32,6 +33,18 @@ func (pg *todo) Find(ctx context.Context, condition *domain.Todo) (domain.TodoLi
 
 func (pg *todo) Create(ctx context.Context, model *domain.Todo) error {
 	if err := DBFromContext(ctx).Create(model).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func (pg *todo) Update(ctx context.Context, model *domain.Todo) error {
+	columns := []string{
+		"updated_at",
+		"task",
+		"done",
+	}
+	if err := DBFromContext(ctx).Select(columns).Updates(model).Error; err != nil {
 		return err
 	}
 	return nil

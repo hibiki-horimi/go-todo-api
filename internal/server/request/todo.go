@@ -8,7 +8,7 @@ import (
 )
 
 type CreateTodo struct {
-	Task string `json:"task"`
+	Task string `json:"task" validate:"required"`
 }
 
 func (req *CreateTodo) ToTodo() *domain.Todo {
@@ -23,4 +23,31 @@ func (req *CreateTodo) ToTodo() *domain.Todo {
 
 type GetTodo struct {
 	ID string `param:"taskId" validate:"required,uuid"`
+}
+
+func (req *GetTodo) ToTodo() *domain.Todo {
+	return &domain.Todo{
+		ID: uuid.Must(uuid.FromString(req.ID)),
+	}
+}
+
+type UpdateTodo struct {
+	ID   string `param:"taskId" validate:"required,uuid"`
+	Task string `json:"task" validate:"required"`
+	Done *bool  `json:"done" validate:"required"`
+}
+
+func (req *UpdateTodo) ToTodo() *domain.Todo {
+	return &domain.Todo{
+		ID:        uuid.Must(uuid.FromString(req.ID)),
+		UpdatedAt: time.Now(),
+		Task:      req.Task,
+		Done:      *req.Done,
+	}
+}
+
+func (req *UpdateTodo) ToTodoByID() *domain.Todo {
+	return &domain.Todo{
+		ID: uuid.Must(uuid.FromString(req.ID)),
+	}
 }
