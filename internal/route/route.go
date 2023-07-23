@@ -20,10 +20,13 @@ func New(e *echo.Echo, srv *server.Server) {
 			return c.JSON(http.StatusOK, "healthy")
 		})
 
-		task := api.Group("/tasks")
+		tasks := api.Group("/tasks")
 		{
-			task.GET("/", srv.Todo.List)
-			task.POST("/", srv.Todo.Create)
+			tasks.GET("", srv.Todo.List)
+			tasks.POST("", srv.Todo.Create)
+
+			task := tasks.Group("/:taskId")
+			task.GET("", srv.Todo.Get)
 		}
 	}
 }

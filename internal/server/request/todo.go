@@ -20,3 +20,7 @@ func (req *CreateTodo) ToTodo() *domain.Todo {
 		Done:      false,
 	}
 }
+
+type GetTodo struct {
+	ID string `param:"taskId" validate:"required,uuid"`
+}
