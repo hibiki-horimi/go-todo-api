@@ -93,7 +93,7 @@ curl localhost:8080/api/todos/12345678-90ab-cdef-ghij-klmnopqrstuv
 Todo タスクの名前とステータスを ID で指定して更新します。更新するフィールドを含む JSON ペイロードが必要です。
 
 ```bash
-curl -X PUT -H "Content-Type: application/json" -d '{"task":"航空券を買う", "done": true}' localhost:8080/api/tasks/cae0bb14-d854-4387-b27f-28b1df880d02
+curl -X PUT -H "Content-Type: application/json" -d '{"task":"航空券を買う", "done": true}' localhost:8080/api/todos/12345678-90ab-cdef-ghij-klmnopqrstuv
 ```
 
 `DELETE /api/todos/:id`

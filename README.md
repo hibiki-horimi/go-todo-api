@@ -92,7 +92,7 @@ curl localhost:8080/api/todos/12345678-90ab-cdef-ghij-klmnopqrstuv
 Updates the name and/or the status of a Todo task by its ID. Requires a JSON payload in the request body with the fields to be updated.
 
 ```bash
-curl -X PUT -H "Content-Type: application/json" -d '{"task":"Book Flight Tickets", "done": true}' localhost:8080/api/tasks/cae0bb14-d854-4387-b27f-28b1df880d02
+curl -X PUT -H "Content-Type: application/json" -d '{"task":"Book Flight Tickets", "done": true}' localhost:8080/api/todos/12345678-90ab-cdef-ghij-klmnopqrstuv
 ```
 
 `DELETE /api/todos/:id`
