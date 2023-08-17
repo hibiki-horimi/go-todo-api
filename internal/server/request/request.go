@@ -17,8 +17,8 @@ func InitBinder() echo.Binder {
 	}
 }
 
-func (cb *CustomBinder) Bind(i interface{}, c echo.Context) error {
-	if err := cb.binder.Bind(i, c); err != nil {
+func (cb *CustomBinder) Bind(v any, c echo.Context) error {
+	if err := cb.binder.Bind(v, c); err != nil {
 		return echo.NewHTTPError(http.StatusUnprocessableEntity, err.Error())
 	}
 	return nil
@@ -32,8 +32,8 @@ func InitValidator() *CustomValidator {
 	return &CustomValidator{validator: validator.New()}
 }
 
-func (cv *CustomValidator) Validate(i interface{}) error {
-	if err := cv.validator.Struct(i); err != nil {
+func (cv *CustomValidator) Validate(v any) error {
+	if err := cv.validator.Struct(v); err != nil {
 		return echo.NewHTTPError(http.StatusUnprocessableEntity, err.Error())
 	}
 	return nil
