@@ -3,8 +3,9 @@ package request
 import (
 	"time"
 
-	"github.com/hibiki-horimi/go-todo-api/internal/domain"
 	uuid "github.com/satori/go.uuid"
+
+	"github.com/hibiki-horimi/go-todo-api/internal/domain"
 )
 
 type CreateTodo struct {

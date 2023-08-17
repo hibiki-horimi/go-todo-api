@@ -4,12 +4,13 @@ import (
 	"errors"
 	"net/http"
 
+	echo "github.com/labstack/echo/v4"
+	"gorm.io/gorm"
+
 	"github.com/hibiki-horimi/go-todo-api/internal/database/postgres"
 	"github.com/hibiki-horimi/go-todo-api/internal/domain"
 	"github.com/hibiki-horimi/go-todo-api/internal/server/request"
 	"github.com/hibiki-horimi/go-todo-api/internal/server/response"
-	echo "github.com/labstack/echo/v4"
-	"gorm.io/gorm"
 )
 
 type Todo interface {

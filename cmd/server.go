@@ -8,13 +8,14 @@ import (
 	"os/signal"
 	"time"
 
+	echo "github.com/labstack/echo/v4"
+	"github.com/spf13/cobra"
+
 	"github.com/hibiki-horimi/go-todo-api/internal/config"
 	"github.com/hibiki-horimi/go-todo-api/internal/database/postgres"
 	"github.com/hibiki-horimi/go-todo-api/internal/middleware"
 	"github.com/hibiki-horimi/go-todo-api/internal/route"
 	"github.com/hibiki-horimi/go-todo-api/internal/server"
-	echo "github.com/labstack/echo/v4"
-	"github.com/spf13/cobra"
 )
 
 var serverCmd = &cobra.Command{

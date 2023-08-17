@@ -1,8 +1,9 @@
 package postgres
 
 import (
-	"github.com/hibiki-horimi/go-todo-api/internal/domain"
 	"gorm.io/gorm"
+
+	"github.com/hibiki-horimi/go-todo-api/internal/domain"
 )
 
 func Migrate(db *gorm.DB) error {

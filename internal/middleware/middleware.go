@@ -1,11 +1,12 @@
 package middleware
 
 import (
-	"github.com/hibiki-horimi/go-todo-api/internal/database/postgres"
-	"github.com/hibiki-horimi/go-todo-api/internal/server/request"
 	echo "github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/gorm"
+
+	"github.com/hibiki-horimi/go-todo-api/internal/database/postgres"
+	"github.com/hibiki-horimi/go-todo-api/internal/server/request"
 )
 
 func Setup(e *echo.Echo, gdb *gorm.DB, rdb *postgres.Postgres) {

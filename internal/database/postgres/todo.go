@@ -3,8 +3,9 @@ package postgres
 import (
 	"context"
 
-	"github.com/hibiki-horimi/go-todo-api/internal/domain"
 	"gorm.io/gorm/clause"
+
+	"github.com/hibiki-horimi/go-todo-api/internal/domain"
 )
 
 type Todo interface {

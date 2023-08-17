@@ -3,8 +3,9 @@ package route
 import (
 	"net/http"
 
-	"github.com/hibiki-horimi/go-todo-api/internal/server"
 	echo "github.com/labstack/echo/v4"
+
+	"github.com/hibiki-horimi/go-todo-api/internal/server"
 )
 
 type router struct {
