@@ -28,13 +28,13 @@ func migrateRun(_ *cobra.Command, _ []string) error {
 	}
 	time.Local = loc
 
-	con, err := postgres.Connect(conf)
+	conn, err := postgres.Connect(conf)
 	if err != nil {
 		log.Fatal(err)
 		return err
 	}
 
-	if err := postgres.Migrate(con); err != nil {
+	if err := postgres.Migrate(conn); err != nil {
 		log.Fatal(err)
 		return err
 	}
